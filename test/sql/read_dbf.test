@@ -1,0 +1,23 @@
+# name: test/sql/read_dbf.test
+# description: test read_dbf extension
+# group: [sql]
+
+# Before we load the extension, this will fail
+statement error
+SELECT read_dbf('Sam');
+----
+Catalog Error: Scalar Function with name read_dbf does not exist!
+
+# Require statement will ensure this test is run with this extension loaded
+require read_dbf
+
+# Confirm the extension works
+query I
+SELECT read_dbf('Sam');
+----
+ReadDbf Sam 🐥
+
+query I
+SELECT read_dbf_openssl_version('Michael') ILIKE 'ReadDbf Michael, my linked OpenSSL version is OpenSSL%';
+----
+true

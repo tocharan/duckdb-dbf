@@ -4,7 +4,7 @@
 
 namespace duckdb {
 
-class QuackExtension : public Extension {
+class ReadDbfExtension : public Extension {
 public:
 	void Load(ExtensionLoader &db) override;
 	std::string Name() override;
