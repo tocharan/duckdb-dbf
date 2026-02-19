@@ -4,20 +4,16 @@
 
 # Before we load the extension, this will fail
 statement error
-SELECT read_dbf('Sam');
+SELECT * from read_dbf('file.dbf');
 ----
-Catalog Error: Scalar Function with name read_dbf does not exist!
+Catalog Error: Table Function with name read_dbf does not exist!
 
 # Require statement will ensure this test is run with this extension loaded
 require read_dbf
 
 # Confirm the extension works
 query I
-SELECT read_dbf('Sam');
+SELECT * from read_dbf('filename.dbf');
 ----
-ReadDbf Sam 🐥
+rows
 
-query I
-SELECT read_dbf_openssl_version('Michael') ILIKE 'ReadDbf Michael, my linked OpenSSL version is OpenSSL%';
-----
-true
