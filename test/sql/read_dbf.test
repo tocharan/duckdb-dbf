@@ -4,7 +4,7 @@
 
 # Before we load the extension, this will fail
 statement error
-SELECT * from read_dbf('file.dbf');
+SELECT * from read_dbf('data/bayarea_zipcodes.dbf');
 ----
 Catalog Error: Table Function with name read_dbf does not exist!
 
@@ -13,7 +13,7 @@ require read_dbf
 
 # Confirm the extension works
 query I
-SELECT * from read_dbf('filename.dbf');
+SELECT ZIP from read_dbf('data/bayarea_zipcodes.dbf') order by ZIP limit 1;
 ----
-rows
+94002
 
