@@ -7,9 +7,11 @@ This repository is based on https://github.com/duckdb/extension-template, check 
 This extension, read_dbf, allow you to read dbf files from duckdb.
 
 ### Using the extension
+```
 D install read_dbf from community;
 D load read_dbf;
 D select * from read_dbf('sample.dbf');
+```
 
 ## Building
 ### Managing dependencies
