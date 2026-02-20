@@ -99,7 +99,7 @@ std::string ReadDbfExtension::Version() const {
 extern "C" {
 
 DUCKDB_CPP_EXTENSION_ENTRY(read_dbf, loader) {
-    duckdb::ReadDbfExtension ext;
-    ext.Load(loader);	
+	duckdb::ReadDbfExtension ext;
+	ext.Load(loader);
 }
 }
