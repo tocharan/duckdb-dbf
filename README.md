@@ -1,11 +1,15 @@
-# ReadDbf
+# read_dbf
 
 This repository is based on https://github.com/duckdb/extension-template, check it out if you want to build and ship your own DuckDB extension.
 
 ---
 
-This extension, ReadDbf, allow you to ... <extension_goal>.
+This extension, read_dbf, allow you to read dbf files from duckdb.
 
+### Using the extension
+D install read_dbf from community;
+D load read_dbf;
+D select * from read_dbf('sample.dbf');
 
 ## Building
 ### Managing dependencies
@@ -37,12 +41,12 @@ To run the extension code, simply start the shell with `./build/release/duckdb`.
 
 Now we can use the features from the extension directly in DuckDB. The template contains a single scalar function `read_dbf()` that takes a string arguments and returns a string:
 ```
-D select read_dbf('Jane') as result;
+D select * from read_dbf('sample.dbf');
 ┌───────────────┐
-│    result     │
+│    col_name   │
 │    varchar    │
 ├───────────────┤
-│ ReadDbf Jane 🐥 │
+│ col_value     │
 └───────────────┘
 ```
 
