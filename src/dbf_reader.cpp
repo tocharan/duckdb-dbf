@@ -79,7 +79,7 @@ bool DbfReader::ReadNextRecord(DataChunk &output, idx_t &output_idx) {
 			offset += 4;
 			continue;
 		}
-		if (field.type == DbfType::DOUBLE) {
+		if (field.type == DbfType::DOUBLE || field.type == DbfType::BINARY) {
 			if (offset + 8 <= record_data.size()) {
 				double val = Load<double>(record_data.data() + offset);
 				output.data[col_idx].SetValue(output_idx, Value::DOUBLE(val));
@@ -143,7 +143,7 @@ bool DbfReader::ReadNextRecord(DataChunk &output, idx_t &output_idx) {
 			break;
 		default:
 			// to implement
-			// TIMESTAMP, MEMO, BINARY
+			// TIMESTAMP, MEMO
 			output.data[col_idx].SetValue(output_idx, Value(nullptr));
 			break;
 		}
