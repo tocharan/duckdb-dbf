@@ -85,6 +85,15 @@ private:
 	idx_t current_record = 0;
 
 	void ReadHeader();
+	inline void stripUnicode(std::string& str)
+	{
+		/*
+		not going to support unicode now. just remove the offending chars
+		*/
+		str.erase(remove_if(str.begin(), str.end(), [](unsigned char ch) {
+			return !(ch >= 0 && ch < 128);
+			}), str.end());
+	}
 };
 
 } // namespace duckdb

@@ -32,7 +32,7 @@ void DbfReader::ReadHeader() {
 
 		DbfField field;
 		char name[12] = {0};
-		std::memcpy(name, field_buf.m_archName, 11);
+		std::memcpy(name, field_buf.m_archName, 11);		
 		field.name = std::string(name);
 		field.type = static_cast<DbfType>(field_buf.chFieldType);
 		field.length = field_buf.m_uLength;
@@ -40,6 +40,9 @@ void DbfReader::ReadHeader() {
 
 		fields.push_back(field);
 		field_pos += 32;
+	}
+	if(header.m_iType >= 0x30 && header.m_iType <= 0x32) {
+		handle->Seek(263);
 	}
 }
 
@@ -103,6 +106,7 @@ bool DbfReader::ReadNextRecord(DataChunk &output, idx_t &output_idx) {
 
 		switch (field.type) {
 		case DbfType::CHARACTER:
+			stripUnicode(val);
 			output.data[col_idx].SetValue(output_idx, Value(val));
 			break;
 		case DbfType::NUMERIC:
