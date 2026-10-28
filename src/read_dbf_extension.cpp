@@ -45,7 +45,7 @@ static LogicalType DbfToLogicalType(const DbfField &field) {
 }
 
 static unique_ptr<FunctionData> ReadDbfBind(ClientContext &context, TableFunctionBindInput &input,
-                                            vector<LogicalType> &return_types, vector<string> &names) {
+                                            vector<LogicalType> &return_types, vector<Identifier> &names) {
 	auto file_path = input.inputs[0].GetValue<string>();
 	auto bind_data = make_uniq<ReadDbfBindData>(file_path);
 
@@ -53,7 +53,7 @@ static unique_ptr<FunctionData> ReadDbfBind(ClientContext &context, TableFunctio
 	reader.Open();
 
 	for (auto &field : reader.GetFields()) {
-		names.push_back(field.name);
+		names.push_back(Identifier(field.name));
 		return_types.push_back(DbfToLogicalType(field));
 	}
 
